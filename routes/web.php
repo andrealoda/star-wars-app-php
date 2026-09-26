@@ -17,4 +17,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function (){
+    Route::resource('planets', Admin\PlanetController::class)->name('planets');
+    Route::resource('species', Admin\SpeciesController::class)->name('species');
+    Route::resource('people', Admin\PersonController::class)->name('persons');
+    Route::resource('films', Admin\FilmController::class)->name('films');
+});
+
 require __DIR__.'/auth.php';
