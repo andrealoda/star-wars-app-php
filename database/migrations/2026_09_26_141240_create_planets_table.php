@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('planets', function (Blueprint $table) {
             $table->id();
+
+            $table->string('nome');
+            $table->string('clima')->nullable();
+            $table->string('terreno')->nullable();
+            $table->unsignedBigInteger('popolazione')->nullable();
+            $table->string('immagine')->nullable();
+
             $table->timestamps();
         });
     }

@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('people', function (Blueprint $table) {
             $table->id();
+
+            $table->string('name');
+            $table->unsignedInteger('altezza')->nullable();
+            $table->unsignedInteger('peso')->nullable();
+            $table->string('colore_capelli')->nullable();
+            $table->string('colore_occhi')->nullable();
+            $table->string('anno_nascita')->nullable();
+            $table->string('genere')->nullable();
+            $table->string('immagine')->nullable();
+            $table->foreignId('planet_id')->nullable()->constrained('planets')->nullOnDelete();
+            $table->foreignId('species_id')->nullable()->constrained('species')->nullOnDelete();
+
             $table->timestamps();
         });
     }
