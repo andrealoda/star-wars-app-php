@@ -3,6 +3,14 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Admin\FilmController;
+use App\Http\Controllers\Admin\PersonController;
+use App\Http\Controllers\Admin\PlanetController;
+use App\Http\Controllers\Admin\SpeciesController;
+
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -17,11 +25,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function (){
-    Route::resource('planets', Admin\PlanetController::class)->name('planets');
-    Route::resource('species', Admin\SpeciesController::class)->name('species');
-    Route::resource('people', Admin\PersonController::class)->name('persons');
-    Route::resource('films', Admin\FilmController::class)->name('films');
-});
+Route::middleware(['auth'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::resource('planets', PlanetController::class);
+        Route::resource('species', SpeciesController::class);
+        Route::resource('people', PersonController::class);
+        Route::resource('films', FilmController::class);
+    });
+
 
 require __DIR__.'/auth.php';
