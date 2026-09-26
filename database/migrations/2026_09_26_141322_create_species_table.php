@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('nome');
-            $table->string('classificazione')->nullable();
             $table->string('lingua')->nullable();
-            $table->string('aspettativa_vita')->nullable();
             $table->string('immagine')->nullable();
 
             $table->timestamps();

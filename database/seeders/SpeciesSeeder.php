@@ -16,9 +16,7 @@ class SpeciesSeeder extends Seeder
             $newSp = new Species();
             $newSp->id = $this->idFromUrl($sp['url']);
             $newSp->nome = $sp['name'];
-            $newSp->classificazione = $sp['classification'] !== 'unknown' ? $sp['classification'] : null;
             $newSp->lingua = $sp['language'] !== 'unknown' ? $sp['language'] : null;
-            $newSp->aspettativa_vita = is_numeric($sp['average_lifespan']) ? $sp['average_lifespan'] : null;
             $newSp->save();
         }
     }

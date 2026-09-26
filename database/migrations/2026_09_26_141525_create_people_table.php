@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('people', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
+            $table->string('nome');
             $table->unsignedInteger('altezza')->nullable();
             $table->unsignedInteger('peso')->nullable();
             $table->string('colore_capelli')->nullable();
