@@ -22,7 +22,8 @@ class Planetcontroller extends Controller
      */
     public function create()
     {
-        //
+        $planet = new Planet();
+        return view('admin.planets.create', compact('planet'));
     }
 
     /**
@@ -30,7 +31,23 @@ class Planetcontroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $data = $request->validate([
+            'nome' => 'required|string|max:255',
+            'clima' => 'nullable|string|max:255',
+            'terreno' => 'nullable|string|max:255',
+            'popolazione' => 'nullable|integer|min:0',
+        ]);
+
+        $newPlanet = new Planet();
+        $newPlanet->nome = $data['nome'];
+        $newPlanet->clima = $data['clima'] ?? null;
+        $newPlanet->terreno = $data['terreno'] ?? null;
+        $newPlanet->popolazione = $data['popolazione'] ?? null;
+
+        $newPlanet->save();
+
+        return redirect()->route('admin.planets.index')->with('success', 'Pianeta creato con successo.');
     }
 
     /**
@@ -52,9 +69,22 @@ class Planetcontroller extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Planet $planet)
     {
-        //
+        $data = $request->validate([
+            'nome' => 'required|string|max:255',
+            'clima' => 'nullable|string|max:255',
+            'terreno' => 'nullable|string|max:255',
+            'popolazione' => 'nullable|integer|min:0',
+        ]);
+
+        $planet->nome = $data['nome'];
+        $planet->clima = $data['clima'] ?? null;
+        $planet->terreno = $data['terreno'] ?? null;
+        $planet->popolazione = $data['popolazione'] ?? null;
+        $planet->save();
+
+        return redirect()->route('admin.planets.index')->with('success', 'Pianeta aggiornato con successo.');
     }
 
     /**
