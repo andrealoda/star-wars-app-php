@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Planet;
 use Illuminate\Http\Request;
 
-class Planetcontroller extends Controller
+class PlanetController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -61,9 +61,9 @@ class Planetcontroller extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Planet $planet)
     {
-        //
+        return view('admin.planets.edit', compact('planet'));
     }
 
     /**

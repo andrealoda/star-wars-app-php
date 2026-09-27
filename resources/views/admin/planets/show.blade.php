@@ -11,6 +11,7 @@
         </ul>
 
         <a href="{{ route('admin.planets.index') }}" class="btn btn-secondary">Torna alla lista</a>
+        <a href="{{ route('admin.planets.edit', $planet) }}" class="btn btn-warning">Modifica</a>
 
         <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
             Elimina

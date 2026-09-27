@@ -12,12 +12,12 @@ class SpeciesSeeder extends Seeder
         $path = database_path('seeders/data/species.json');
         $species = json_decode(file_get_contents($path), true);
 
-        foreach ($species as $sp) {
-            $newSp = new Species();
-            $newSp->id = $this->idFromUrl($sp['url']);
-            $newSp->nome = $sp['name'];
-            $newSp->lingua = $sp['language'] !== 'unknown' ? $sp['language'] : null;
-            $newSp->save();
+        foreach ($species as $specie) {
+            $newSpecie = new Species();
+            $newSpecie->id = $this->idFromUrl($specie['url']);
+            $newSpecie->nome = $specie['name'];
+            $newSpecie->lingua = $specie['language'] !== 'unknown' ? $specie['language'] : null;
+            $newSpecie->save();
         }
     }
 
