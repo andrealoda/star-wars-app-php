@@ -19,7 +19,9 @@
 
                     {{ __('You are logged in!') }}
                 </div>
+
             </div>
+            <a href="{{ route('admin.planets.index')}}" class="btn btn-sm btn-primary mt-3">Vai alla lista dei pianeti</a>
         </div>
     </div>
 </div>
