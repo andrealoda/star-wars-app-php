@@ -47,7 +47,7 @@ class Planetcontroller extends Controller
 
         $newPlanet->save();
 
-        return redirect()->route('admin.planets.index')->with('success', 'Pianeta creato con successo.');
+        return redirect()->route('admin.planets.show', $newPlanet)->with('success', 'Pianeta creato con successo.');
     }
 
     /**
@@ -84,7 +84,7 @@ class Planetcontroller extends Controller
         $planet->popolazione = $data['popolazione'] ?? null;
         $planet->save();
 
-        return redirect()->route('admin.planets.index')->with('success', 'Pianeta aggiornato con successo.');
+        return redirect()->route('admin.planets.show', $planet)->with('success', 'Pianeta aggiornato con successo.');
     }
 
     /**
