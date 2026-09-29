@@ -35,5 +35,6 @@
                 @endforeach
             </tbody>
         </table>
+        <a href="{{ route('admin.planets.create') }}" class="btn btn-primary mt-3">Nuovo pianeta</a>
     </div>
 @endsection

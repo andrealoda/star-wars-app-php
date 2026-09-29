@@ -1,1 +1,27 @@
 @import '~bootstrap/scss/bootstrap';
+
+/* Tema Star Wars — override minimo sopra Bootstrap dark mode */
+
+.navbar-brand {
+    color: #ffe81f !important; /* giallo iconico Star Wars */
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.btn-primary {
+    --bs-btn-bg: #4da6ff;
+    --bs-btn-border-color: #4da6ff;
+    --bs-btn-hover-bg: #2f8ce6;
+    --bs-btn-hover-border-color: #2f8ce6;
+    --bs-btn-active-bg: #1a75d1;
+    --bs-btn-active-border-color: #1a75d1;
+}
+
+.btn-warning {
+    --bs-btn-bg: #ffe81f;
+    --bs-btn-border-color: #ffe81f;
+    --bs-btn-color: #000;
+    --bs-btn-hover-bg: #e6d01c;
+    --bs-btn-hover-border-color: #e6d01c;
+    --bs-btn-hover-color: #000;
+}
