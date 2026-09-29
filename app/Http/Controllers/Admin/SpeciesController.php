@@ -8,59 +8,60 @@ use Illuminate\Http\Request;
 
 class SpeciesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $species = Species::all();
+        return view('admin.species.index', compact('species'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $specie = new Species();
+        return view('admin.species.create', compact('specie'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'nome' => 'required|string|max:255',
+            'lingua' => 'nullable|string|max:255',
+        ]);
+
+        $newSpecie = new Species();
+        $newSpecie->nome = $data['nome'];
+        $newSpecie->lingua = $data['lingua'] ?? null;
+        $newSpecie->save();
+
+        return redirect()->route('admin.species.show', $newSpecie)->with('success', 'Specie creata con successo.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Species $species)
+    public function show(Species $specie)
     {
-        //
+        return view('admin.species.show', compact('specie'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Species $species)
+    public function edit(Species $specie)
     {
-        //
+        return view('admin.species.edit', compact('specie'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Species $species)
+    public function update(Request $request, Species $specie)
     {
-        //
+        $data = $request->validate([
+            'nome' => 'required|string|max:255',
+            'lingua' => 'nullable|string|max:255',
+        ]);
+
+        $specie->nome = $data['nome'];
+        $specie->lingua = $data['lingua'] ?? null;
+        $specie->save();
+
+        return redirect()->route('admin.species.show', $specie)->with('success', 'Specie aggiornata con successo.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Species $species)
+    public function destroy(Species $specie)
     {
-        //
+        $specie->delete();
+        return redirect()->route('admin.species.index')->with('success', 'Specie eliminata con successo.');
     }
 }

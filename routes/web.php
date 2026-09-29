@@ -30,7 +30,7 @@ Route::middleware(['auth'])
     ->name('admin.')
     ->group(function () {
         Route::resource('planets', PlanetController::class);
-        Route::resource('species', SpeciesController::class);
+        Route::resource('species', SpeciesController::class)->parameters(['species' => 'specie']);
         Route::resource('people', PersonController::class);
         Route::resource('films', FilmController::class);
     });
