@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Film;
 use Illuminate\Http\Request;
+use App\Models\Person;
 
 class FilmController extends Controller
 {
@@ -17,7 +18,8 @@ class FilmController extends Controller
     public function create()
     {
         $film = new Film();
-        return view('admin.films.create', compact('film'));
+        $people = Person::orderBy('nome')->get();
+        return view('admin.films.create', compact('film', 'people'));
     }
 
     public function store(Request $request)
@@ -28,6 +30,8 @@ class FilmController extends Controller
             'data_uscita' => 'nullable|date',
             'regista' => 'nullable|string|max:255',
             'sinossi' => 'nullable|string',
+            'people_ids' => 'nullable|array',
+            'people_ids.*' => 'exists:people,id',
         ]);
 
         $newFilm = new Film();
@@ -37,6 +41,8 @@ class FilmController extends Controller
         $newFilm->regista = $data['regista'] ?? null;
         $newFilm->sinossi = $data['sinossi'] ?? null;
         $newFilm->save();
+
+        $newFilm->people()->sync($data['people_ids'] ?? []);
 
         return redirect()->route('admin.films.show', $newFilm)->with('success', 'Film creato con successo.');
     }
@@ -48,7 +54,8 @@ class FilmController extends Controller
 
     public function edit(Film $film)
     {
-        return view('admin.films.edit', compact('film'));
+        $people = Person::orderBy('nome')->get();
+        return view('admin.films.edit', compact('film', 'people'));
     }
 
     public function update(Request $request, Film $film)
@@ -59,6 +66,8 @@ class FilmController extends Controller
             'data_uscita' => 'nullable|date',
             'regista' => 'nullable|string|max:255',
             'sinossi' => 'nullable|string',
+            'people_ids' => 'nullable|array',
+            'people_ids.*' => 'exists:people,id',
         ]);
 
         $film->titolo = $data['titolo'];
@@ -67,6 +76,8 @@ class FilmController extends Controller
         $film->regista = $data['regista'] ?? null;
         $film->sinossi = $data['sinossi'] ?? null;
         $film->save();
+
+        $film->people()->sync($data['people_ids'] ?? []);
 
         return redirect()->route('admin.films.show', $film)->with('success', 'Film aggiornato con successo.');
     }

@@ -28,7 +28,7 @@ class FilmSeeder extends Seeder
 
             $personIds = array_map(fn($url) => $this->idFromUrl($url), $film['characters']);
             $newFilm->people()->attach($personIds);
-            // per far funzionare "attach" PersonSeeder deve girare prima di FilmSeeder,
+            // per far funzionare "attach", PersonSeeder deve girare prima di FilmSeeder
             // altrimenti ho un errore di vincolo di integrità perchè trova un person_id che ancora non esiste
         }
     }

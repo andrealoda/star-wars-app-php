@@ -16,7 +16,7 @@ class SpeciesSeeder extends Seeder
             $newSpecie = new Species();
             $newSpecie->id = $this->idFromUrl($specie['url']);
             $newSpecie->nome = $specie['name'];
-            $newSpecie->lingua = $specie['language'] !== 'unknown' ? $specie['language'] : null;
+            $newSpecie->lingua = !in_array($specie['language'], ['sconosciuto', 'n/d']) ? $specie['language'] : null;
             $newSpecie->save();
         }
     }

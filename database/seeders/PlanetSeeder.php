@@ -19,8 +19,8 @@ class PlanetSeeder extends Seeder
             $newPlanet = new Planet();
             $newPlanet->id = $this->idFromUrl($planet['url']);
             $newPlanet->nome = $planet['name'];
-            $newPlanet->clima = $planet['climate'] !== 'unknown' ? $planet['climate'] : null;
-            $newPlanet->terreno = $planet['terrain'] !== 'unknown' ? $planet['terrain'] : null;
+            $newPlanet->clima = $planet['climate'] !== 'sconosciuto' ? $planet['climate'] : null;
+            $newPlanet->terreno = $planet['terrain'] !== 'sconosciuto' ? $planet['terrain'] : null;
             $newPlanet->popolazione = is_numeric($planet['population']) ? $planet['population'] : null;
             
             $newPlanet->save();
