@@ -42,6 +42,7 @@
                 @endforeach
             </tbody>
         </table>
+        <a href="{{ route('dashboard') }}" class="btn btn-secondary mt-3">Torna alla dashboard</a>
         <a href="{{ route('admin.people.create') }}" class="btn btn-primary mt-3">Nuovo personaggio</a>
     </div>
 @endsection
