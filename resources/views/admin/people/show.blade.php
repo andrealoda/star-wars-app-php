@@ -11,6 +11,24 @@
             <li class="list-group-item"><strong>Colore degli occhi: </strong>{{ $person->colore_occhi ?? '-' }}</li>
             <li class="list-group-item"><strong>Anno di nascita: </strong>{{ $person->anno_nascita ?? '-' }}</li>
             <li class="list-group-item"><strong>Genere: </strong>{{ $person->genere ?? '-' }}</li>
+
+            {{-- aggiunta del pianeta, se presente --}}
+            <li class="list-group-item"><strong>Pianeta: </strong>
+                @if ($person->planet)
+                    <a href="{{ route('admin.planets.show', $person->planet) }}">{{ $person->planet->nome }}</a>
+                @else
+                    -
+                @endif
+            </li>
+
+            {{-- aggiunta della specie, se presente --}}
+            <li class="list-group-item"><strong>Specie: </strong>
+                @if ($person->species)
+                    <a href="{{ route('admin.species.show', $person->species) }}">{{ $person->species->nome }}</a>
+                @else
+                    -
+                @endif
+            </li>
         </ul>
 
         <a href="{{ route('admin.people.index') }}" class="btn btn-secondary">Torna alla lista</a>

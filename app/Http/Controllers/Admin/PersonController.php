@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Person;
+use App\Models\Planet;
+use App\Models\Species;
 
 class PersonController extends Controller
 {
@@ -24,7 +26,11 @@ class PersonController extends Controller
     public function create()
     {
         $person = new Person();
-        return view('admin.people.create', compact('person'));
+
+        $planet = Planet::orderBy('nome')->get();
+        $species = Species::orderBy('nome')->get();
+
+        return view('admin.people.create', compact('person', 'planets', 'species'));
     }
 
     /**
@@ -40,6 +46,9 @@ class PersonController extends Controller
             'colore_occhi' => 'nullable|string|max:255',
             'anno_nascita' => 'nullable|string|min:0',
             'genere' => 'nullable|string|max:255',
+
+            'planet_id' => 'nullable|exists:planets,id',
+            'species_id' => 'nullable|exists:species,id',
         ]);
 
         $newPerson = new Person();
@@ -50,6 +59,9 @@ class PersonController extends Controller
         $newPerson->colore_occhi = $data['colore_occhi'] ?? null;
         $newPerson->anno_nascita = $data['anno_nascita'] ?? null;
         $newPerson->genere = $data['genere'] ?? null;
+
+        $newPerson->planet_id = $data['planet_id'] ?? null;
+        $newPerson->species_id = $data['species_id'] ?? null;
 
         $newPerson->save();
 
@@ -69,7 +81,9 @@ class PersonController extends Controller
      */
     public function edit(Person $person)
     {
-        return view('admin.people.edit', compact('person'));
+        $planets = Planet::orderBy('nome')->get();
+        $species = Species::orderBy('nome')->get();
+        return view('admin.people.edit', compact('person', 'planets', 'species'));
     }
 
     /**
@@ -85,6 +99,9 @@ class PersonController extends Controller
             'colore_occhi' => 'nullable|string|max:255',
             'anno_nascita' => 'nullable|string|min:0',
             'genere' => 'nullable|string|max:255',
+
+            'planet_id' => 'nullable|exists:planets,id',
+            'species_id' => 'nullable|exists:species,id',
         ]);
 
         $person->nome = $data['nome'];
@@ -94,6 +111,9 @@ class PersonController extends Controller
         $person->colore_occhi = $data['colore_occhi'] ?? null;
         $person->anno_nascita = $data['anno_nascita'] ?? null;
         $person->genere = $data['genere'] ?? null;
+
+        $person->planet_id = $data['planet_id'] ?? null;
+        $person->species_id = $data['species_id'] ?? null;
 
         $person->save();
 

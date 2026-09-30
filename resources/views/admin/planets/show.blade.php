@@ -10,6 +10,19 @@
             <li class="list-group-item"><strong>Popolazione:</strong>{{ $planet->popolazione ?? '-' }}</li>
         </ul>
 
+        <h2 class="h5 mt-4">Abitanti</h2>
+        @if ($planet->people->isEmpty())
+            <p class="text-secondary">Nessun personaggio collegato.</p>
+        @else
+            <ul class="list-group mb-3">
+                @foreach ($planet->people as $person)
+                    <li class="list-group-item">
+                        <a href="{{ route('admin.people.show', $person) }}">{{ $person->nome }}</a>
+                    </li>
+                @endforeach
+            </ul>
+        @endif
+
         <a href="{{ route('admin.planets.index') }}" class="btn btn-secondary">Torna alla lista</a>
         <a href="{{ route('admin.planets.edit', $planet) }}" class="btn btn-warning">Modifica</a>
 
