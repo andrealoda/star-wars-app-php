@@ -27,7 +27,7 @@ class PersonController extends Controller
     {
         $person = new Person();
 
-        $planet = Planet::orderBy('nome')->get();
+        $planets = Planet::orderBy('nome')->get();
         $species = Species::orderBy('nome')->get();
 
         return view('admin.people.create', compact('person', 'planets', 'species'));
