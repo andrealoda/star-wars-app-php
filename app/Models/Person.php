@@ -17,4 +17,9 @@ class Person extends Model
     {
         return $this->belongsTo(Species::class);
     }
+
+    public function films()
+    {
+        return $this->belongsToMany(Film::class);
+    }
 }
