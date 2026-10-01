@@ -13,6 +13,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>Immagine</th>
                     <th>Nome</th>
                     <th>Altezza</th>
                     <th>Peso</th>
@@ -27,6 +28,14 @@
 
                 @foreach ($people as $person)
                     <tr>
+                        <td>
+                            @if ($person->immagine)
+                                <img src="{{ asset('storage/' . $person->immagine) }}" alt="{{ $person->titolo }}"
+                                    class="img-thumbnail" style="height: 60px;">
+                            @else
+                                <span class="text-secondary">-</span>
+                            @endif
+                        </td>
                         <td>{{ $person->nome }}</td>
                         <td>{{ $person->altezza ?? '-' }}</td>
                         <td>{{ $person->peso ?? '-' }}</td>

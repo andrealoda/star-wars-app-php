@@ -4,6 +4,11 @@
     <div class="container py-4">
         <h1>{{ $film->titolo }}</h1>
 
+        @if ($film->immagine)
+            <img src="{{ asset('storage/' . $film->immagine) }}" alt="{{ $film->titolo }}" class="img-fluid mb-3 img-thumbnail"
+                style="max-height: 300px;">
+        @endif
+
         <ul class="list-group mb-3">
             <li class="list-group-item"><strong>Episodio: </strong>{{ $film->episodio ?? '-' }}</li>
             <li class="list-group-item"><strong>Data di uscita: </strong>{{ $film->data_uscita ?? '-' }}</li>

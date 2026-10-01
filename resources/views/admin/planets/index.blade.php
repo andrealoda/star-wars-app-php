@@ -13,6 +13,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>Immagine</th>
                     <th>Nome</th>
                     <th>Clima</th>
                     <th>Terreno</th>
@@ -24,6 +25,14 @@
 
                 @foreach ($planets as $planet)
                     <tr>
+                        <td>
+                            @if ($planet->immagine)
+                                <img src="{{ asset('storage/' . $planet->immagine) }}" alt="{{ $planet->titolo }}"
+                                    class="img-thumbnail" style="height: 60px;">
+                            @else
+                                <span class="text-secondary">-</span>
+                            @endif
+                        </td>
                         <td>{{ $planet->nome }}</td>
                         <td>{{ $planet->clima ?? '-' }}</td>
                         <td>{{ $planet->terreno ?? '-' }}</td>

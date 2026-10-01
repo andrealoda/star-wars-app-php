@@ -11,6 +11,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>Immagine</th>
                     <th>Episodio</th>
                     <th>Titolo</th>
                     <th>Data di uscita</th>
@@ -21,6 +22,14 @@
             <tbody>
                 @foreach ($films as $film)
                     <tr>
+                        <td>
+                            @if ($film->immagine)
+                                <img src="{{ asset('storage/' . $film->immagine) }}" alt="{{ $film->titolo }}"
+                                     class="img-thumbnail" style="height: 60px;">
+                            @else
+                                <span class="text-secondary">-</span>
+                            @endif
+                        </td>
                         <td>{{ $film->episodio ?? '-' }}</td>
                         <td>{{ $film->titolo }}</td>
                         <td>{{ $film->data_uscita ?? '-' }}</td>

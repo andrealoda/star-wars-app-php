@@ -4,6 +4,11 @@
     <div class="container py-4">
         <h1>{{ $planet->nome }}</h1>
 
+        @if ($planet->immagine)
+            <img src="{{ asset('storage/' . $planet->immagine) }}" alt="{{ $planet->titolo }}" class="img-fluid mb-3 img-thumbnail"
+                style="max-height: 300px;">
+        @endif
+
         <ul class="list-group mb-3">
             <li class="list-group-item"><strong>Clima:</strong>{{ $planet->clima ?? '-' }}</li>
             <li class="list-group-item"><strong>Terreno:</strong>{{ $planet->terreno ?? '-' }}</li>

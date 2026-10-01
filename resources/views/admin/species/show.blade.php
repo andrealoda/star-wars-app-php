@@ -4,6 +4,11 @@
     <div class="container py-4">
         <h1>{{ $specie->nome }}</h1>
 
+        @if ($specie->immagine)
+            <img src="{{ asset('storage/' . $specie->immagine) }}" alt="{{ $specie->titolo }}" class="img-fluid mb-3 img-thumbnail"
+                style="max-height: 300px;">
+        @endif
+
         <ul class="list-group mb-3">
             <li class="list-group-item"><strong>Lingua: </strong>{{ $specie->lingua ?? '-' }}</li>
         </ul>

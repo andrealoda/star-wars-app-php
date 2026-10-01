@@ -11,6 +11,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>Immagine</th>
                     <th>Nome</th>
                     <th>Lingua</th>
                     <th></th>
@@ -19,6 +20,14 @@
             <tbody>
                 @foreach ($species as $specie)
                     <tr>
+                        <td>
+                            @if ($specie->immagine)
+                                <img src="{{ asset('storage/' . $specie->immagine) }}" alt="{{ $specie->titolo }}"
+                                    class="img-thumbnail" style="height: 60px;">
+                            @else
+                                <span class="text-secondary">-</span>
+                            @endif
+                        </td>
                         <td>{{ $specie->nome }}</td>
                         <td>{{ $specie->lingua ?? '-' }}</td>
                         <td>
