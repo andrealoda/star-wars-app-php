@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Planet;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+
 class PlanetController extends Controller
 {
     /**
@@ -37,6 +39,8 @@ class PlanetController extends Controller
             'clima' => 'nullable|string|max:255',
             'terreno' => 'nullable|string|max:255',
             'popolazione' => 'nullable|integer|min:0',
+
+            'immagine' => 'nullable|image|max:2048',
         ]);
 
         $newPlanet = new Planet();
@@ -44,6 +48,11 @@ class PlanetController extends Controller
         $newPlanet->clima = $data['clima'] ?? null;
         $newPlanet->terreno = $data['terreno'] ?? null;
         $newPlanet->popolazione = $data['popolazione'] ?? null;
+
+        if ($request->hasFile('immagine')) {
+            // scriviamo il file nella cartella public/planets
+            $newPlanet->immagine = $request->file('immagine')->store('planets', 'public');
+        }
 
         $newPlanet->save();
 
@@ -76,12 +85,24 @@ class PlanetController extends Controller
             'clima' => 'nullable|string|max:255',
             'terreno' => 'nullable|string|max:255',
             'popolazione' => 'nullable|integer|min:0',
+
+            'immagine' => 'nullable|image|max:2048',
         ]);
 
         $planet->nome = $data['nome'];
         $planet->clima = $data['clima'] ?? null;
         $planet->terreno = $data['terreno'] ?? null;
         $planet->popolazione = $data['popolazione'] ?? null;
+
+        if ($request->hasFile('immagine')) {
+            if ($planet->immagine) {
+                // cancelliamo il vecchio file
+                Storage::disk('public')->delete($planet->immagine);
+            }
+            // scriviamo il nuovo file nella cartella public/planets
+            $planet->immagine = $request->file('immagine')->store('planets', 'public');
+        }
+
         $planet->save();
 
         return redirect()->route('admin.planets.show', $planet)->with('success', 'Pianeta aggiornato con successo.');
@@ -92,6 +113,10 @@ class PlanetController extends Controller
      */
     public function destroy(Planet $planet)
     {
+        if ($planet->immagine) {
+            Storage::disk('public')->delete($planet->immagine);
+        }
+
         $planet->delete();
         return redirect()->route('admin.planets.index')->with('success', 'Pianeta eliminato con successo.');
     }

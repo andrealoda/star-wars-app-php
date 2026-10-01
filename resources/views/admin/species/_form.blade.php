@@ -16,5 +16,21 @@
     @endif
 </div>
 
+<div class="mb-3">
+    <label for="immagine" class="form-label">Immagine</label>
+    <input type="file" name="immagine" id="immagine"
+        class="form-control @if ($errors->has('immagine')) is-invalid @endif">
+    @if ($errors->has('immagine'))
+        <div class="invalid-feedback">{{ $errors->first('immagine') }}</div>
+    @endif
+
+    @if ($specie->immagine)
+        <div class="mt-2">
+            <img src="{{ asset('storage/' . $specie->immagine) }}" alt="{{ $specie->nome }}"
+                style="max-height: 150px;">
+        </div>
+    @endif
+</div>
+
 <button type="submit" class="btn btn-primary">Salva</button>
 <a href="{{ route('admin.species.index') }}" class="btn btn-secondary">Annulla</a>

@@ -9,6 +9,8 @@ use App\Models\Person;
 use App\Models\Planet;
 use App\Models\Species;
 
+use Illuminate\Support\Facades\Storage;
+
 class PersonController extends Controller
 {
     /**
@@ -49,6 +51,8 @@ class PersonController extends Controller
 
             'planet_id' => 'nullable|exists:planets,id',
             'species_id' => 'nullable|exists:species,id',
+
+            'immagine' => 'nullable|image|max:2048',
         ]);
 
         $newPerson = new Person();
@@ -62,6 +66,11 @@ class PersonController extends Controller
 
         $newPerson->planet_id = $data['planet_id'] ?? null;
         $newPerson->species_id = $data['species_id'] ?? null;
+
+        if ($request->hasFile('immagine')) {
+            // scriviamo il file nella cartella public/people
+            $newPerson->immagine = $request->file('immagine')->store('people', 'public');
+        }
 
         $newPerson->save();
 
@@ -102,6 +111,8 @@ class PersonController extends Controller
 
             'planet_id' => 'nullable|exists:planets,id',
             'species_id' => 'nullable|exists:species,id',
+
+            'immagine' => 'nullable|image|max:2048',
         ]);
 
         $person->nome = $data['nome'];
@@ -115,6 +126,15 @@ class PersonController extends Controller
         $person->planet_id = $data['planet_id'] ?? null;
         $person->species_id = $data['species_id'] ?? null;
 
+        if ($request->hasFile('immagine')) {
+            if ($person->immagine) {
+                // cancelliamo il vecchio file
+                Storage::disk('public')->delete($person->immagine);
+            }
+            // scriviamo il nuovo file nella cartella public/people
+            $person->immagine = $request->file('immagine')->store('people', 'public');
+        }
+
         $person->save();
 
         return redirect()->route('admin.people.show', $person)->with('success', 'Personaggio aggiornato con successo');
@@ -125,6 +145,10 @@ class PersonController extends Controller
      */
     public function destroy(Person $person)
     {
+        if ($person->immagine) {
+            Storage::disk('public')->delete($person->immagine);
+        }    
+
         $person->delete();
         return redirect()->route('admin.people.index')->with('success', 'Personaggio eliminato con successo.');
     }

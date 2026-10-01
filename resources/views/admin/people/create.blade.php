@@ -4,7 +4,7 @@
 <div class="container py-4">
     <h1 class="mb-4">Nuovo personaggio</h1>
 
-    <form action="{{ route('admin.people.store') }}" method="POST">
+    <form action="{{ route('admin.people.store') }}" method="POST" enctype="multipart/form-data">
         @include('admin.people._form')
     </form>
 </div>

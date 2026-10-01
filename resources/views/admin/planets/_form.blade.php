@@ -2,7 +2,8 @@
 
 <div class="mb-3">
     <label for="nome" class="form-label">Nome</label>
-    <input type="text" name="nome" id="nome" class="form-control @if ($errors->has('nome')) is-invalid @endif" value="{{ old('nome', $planet->nome) }}">
+    <input type="text" name="nome" id="nome"
+        class="form-control @if ($errors->has('nome')) is-invalid @endif" value="{{ old('nome', $planet->nome) }}">
     @if ($errors->has('nome'))
         <div class="invalid-feedback">{{ $errors->first('nome') }}</div>
     @endif
@@ -10,7 +11,9 @@
 
 <div class="mb-3">
     <label for="clima" class="form-label">Clima</label>
-    <input type="text" name="clima" id="clima" class="form-control @if ($errors->has('clima')) is-invalid @endif" value="{{ old('clima', $planet->clima) }}">
+    <input type="text" name="clima" id="clima"
+        class="form-control @if ($errors->has('clima')) is-invalid @endif"
+        value="{{ old('clima', $planet->clima) }}">
     @if ($errors->has('clima'))
         <div class="invalid-feedback">{{ $errors->first('clima') }}</div>
     @endif
@@ -18,7 +21,9 @@
 
 <div class="mb-3">
     <label for="terreno" class="form-label">Terreno</label>
-    <input type="text" name="terreno" id="terreno" class="form-control @if ($errors->has('terreno')) is-invalid @endif" value="{{ old('terreno', $planet->terreno) }}">
+    <input type="text" name="terreno" id="terreno"
+        class="form-control @if ($errors->has('terreno')) is-invalid @endif"
+        value="{{ old('terreno', $planet->terreno) }}">
     @if ($errors->has('terreno'))
         <div class="invalid-feedback">{{ $errors->first('terreno') }}</div>
     @endif
@@ -26,9 +31,27 @@
 
 <div class="mb-3">
     <label for="popolazione" class="form-label">Popolazione</label>
-    <input type="number" name="popolazione" id="popolazione" class="form-control @if ($errors->has('popolazione')) is-invalid @endif" value="{{ old('popolazione', $planet->popolazione) }}">
+    <input type="number" name="popolazione" id="popolazione"
+        class="form-control @if ($errors->has('popolazione')) is-invalid @endif"
+        value="{{ old('popolazione', $planet->popolazione) }}">
     @if ($errors->has('popolazione'))
         <div class="invalid-feedback">{{ $errors->first('popolazione') }}</div>
+    @endif
+</div>
+
+<div class="mb-3">
+    <label for="immagine" class="form-label">Immagine</label>
+    <input type="file" name="immagine" id="immagine"
+        class="form-control @if ($errors->has('immagine')) is-invalid @endif">
+    @if ($errors->has('immagine'))
+        <div class="invalid-feedback">{{ $errors->first('immagine') }}</div>
+    @endif
+
+    @if ($planet->immagine)
+        <div class="mt-2">
+            <img src="{{ asset('storage/' . $planet->immagine) }}" alt="{{ $planet->nome }}"
+                style="max-height: 150px;">
+        </div>
     @endif
 </div>
 

@@ -4,7 +4,7 @@
 <div class="container py-4">
     <h1 class="mb-4">Modifica film</h1>
 
-    <form action="{{ route('admin.films.update', $film) }}" method="POST">
+    <form action="{{ route('admin.films.update', $film) }}" method="POST" enctype="multipart/form-data">
         @method('PUT')
         @include('admin.films._form')
     </form>

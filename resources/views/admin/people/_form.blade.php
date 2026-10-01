@@ -85,7 +85,7 @@
 </div>
 
 <div class="mb-3">
-    <label for="species_id" class="form-label">Specie</label>
+    <label for="people_id" class="form-label">Specie</label>
     <select name="species_id" id="species_id" class="form-select @if ($errors->has('species_id')) is-invalid @endif">
         <option value="">-- Nessuna --</option>
         @foreach ($species as $specie)
@@ -94,6 +94,22 @@
     </select>
     @if ($errors->has('species_id'))
         <div class="invalid-feedback">{{ $errors->first('species_id') }}</div>
+    @endif
+</div>
+
+<div class="mb-3">
+    <label for="immagine" class="form-label">Immagine</label>
+    <input type="file" name="immagine" id="immagine"
+        class="form-control @if ($errors->has('immagine')) is-invalid @endif">
+    @if ($errors->has('immagine'))
+        <div class="invalid-feedback">{{ $errors->first('immagine') }}</div>
+    @endif
+
+    @if ($person->immagine)
+        <div class="mt-2">
+            <img src="{{ asset('storage/' . $person->immagine) }}" alt="{{ $person->nome }}"
+                style="max-height: 150px;">
+        </div>
     @endif
 </div>
 

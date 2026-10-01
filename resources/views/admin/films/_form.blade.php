@@ -64,5 +64,22 @@
     </div>
 </div>
 
+<div class="mb-3">
+    <label for="immagine" class="form-label">Immagine</label>
+    <input type="file" name="immagine" id="immagine"
+        class="form-control @if ($errors->has('immagine')) is-invalid @endif">
+    @if ($errors->has('immagine'))
+        <div class="invalid-feedback">{{ $errors->first('immagine') }}</div>
+    @endif
+
+    @if ($film->immagine)
+        <div class="mt-2">
+            <img src="{{ asset('storage/' . $film->immagine) }}" alt="{{ $film->nome }}"
+                style="max-height: 150px;">
+        </div>
+    @endif
+</div>
+
+
 <button type="submit" class="btn btn-primary">Salva</button>
 <a href="{{ route('admin.films.index') }}" class="btn btn-secondary">Annulla</a>

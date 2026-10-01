@@ -4,7 +4,7 @@
 <div class="container py-4">
     <h1 class="mb-4">Modifica pianeta</h1>
 
-    <form action="{{ route('admin.planets.update', $planet) }}" method="POST">
+    <form action="{{ route('admin.planets.update', $planet) }}" method="POST" enctype="multipart/form-data">
         @method('PUT')
         @include('admin.planets._form')
     </form>
