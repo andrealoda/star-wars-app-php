@@ -21,7 +21,7 @@
                 @foreach ($species as $specie)
                     <tr>
                         <td>
-                            <img src="{{ $specie->immagine ? asset('storage/' . $specie->immagine) : asset('img/placeholder-specie.png') }}"
+                            <img src="{{ $specie->immagine ? asset('storage/' . $specie->immagine) : asset('img/placeholder-specie-thumb.png') }}"
                                 class="img-thumbnail" style="max-height: 50px;"" alt="{{ $specie->nome }}">
                         </td>
                         <td>{{ $specie->nome }}</td>

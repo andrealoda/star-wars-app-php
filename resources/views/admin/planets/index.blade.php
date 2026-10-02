@@ -26,7 +26,7 @@
                 @foreach ($planets as $planet)
                     <tr>
                         <td>
-                            <img src="{{ $planet->immagine ? asset('storage/' . $planet->immagine) : asset('img/placeholder-pianeta.png') }}"
+                            <img src="{{ $planet->immagine ? asset('storage/' . $planet->immagine) : asset('img/placeholder-pianeta-thumb.png') }}"
                                 class="img-thumbnail" style="max-height: 50px;"" alt="{{ $planet->nome }}">
                         </td>
                         <td>{{ $planet->nome }}</td>

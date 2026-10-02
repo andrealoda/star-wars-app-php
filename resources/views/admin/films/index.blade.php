@@ -23,7 +23,7 @@
                 @foreach ($films as $film)
                     <tr>
                         <td>
-                            <img src="{{ $film->immagine ? asset('storage/' . $film->immagine) : asset('img/placeholder-film.png') }}"
+                            <img src="{{ $film->immagine ? asset('storage/' . $film->immagine) : asset('img/placeholder-film-thumb.png') }}"
                                 class="img-thumbnail" style="max-height: 50px;"" alt="{{ $film->nome }}">
                         </td>
                         <td>{{ $film->episodio ?? '-' }}</td>
