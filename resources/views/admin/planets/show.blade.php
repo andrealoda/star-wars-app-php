@@ -4,15 +4,13 @@
     <div class="container py-4">
         <h1>{{ $planet->nome }}</h1>
 
-        @if ($planet->immagine)
-            <img src="{{ asset('storage/' . $planet->immagine) }}" alt="{{ $planet->titolo }}" class="img-fluid mb-3 img-thumbnail"
-                style="max-height: 300px;">
-        @endif
+        <img src="{{ $planet->immagine ? asset('storage/' . $planet->immagine) : asset('img/placeholder-pianeta.png') }}"
+            class="img-thumbnail my-3" style="max-height: 300px;" alt="{{ $planet->nome }}">
 
         <ul class="list-group mb-3">
-            <li class="list-group-item"><strong>Clima:</strong>{{ $planet->clima ?? '-' }}</li>
-            <li class="list-group-item"><strong>Terreno:</strong>{{ $planet->terreno ?? '-' }}</li>
-            <li class="list-group-item"><strong>Popolazione:</strong>{{ $planet->popolazione ?? '-' }}</li>
+            <li class="list-group-item"><strong>Clima: </strong>{{ $planet->clima ?? '-' }}</li>
+            <li class="list-group-item"><strong>Terreno: </strong>{{ $planet->terreno ?? '-' }}</li>
+            <li class="list-group-item"><strong>Popolazione: </strong>{{ $planet->popolazione ?? '-' }}</li>
         </ul>
 
         <h2 class="h5 mt-4">Abitanti</h2>

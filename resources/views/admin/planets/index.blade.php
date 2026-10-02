@@ -26,12 +26,8 @@
                 @foreach ($planets as $planet)
                     <tr>
                         <td>
-                            @if ($planet->immagine)
-                                <img src="{{ asset('storage/' . $planet->immagine) }}" alt="{{ $planet->titolo }}"
-                                    class="img-thumbnail" style="height: 60px;">
-                            @else
-                                <span class="text-secondary">-</span>
-                            @endif
+                            <img src="{{ $planet->immagine ? asset('storage/' . $planet->immagine) : asset('img/placeholder-pianeta.png') }}"
+                                class="img-thumbnail" style="max-height: 50px;"" alt="{{ $planet->nome }}">
                         </td>
                         <td>{{ $planet->nome }}</td>
                         <td>{{ $planet->clima ?? '-' }}</td>

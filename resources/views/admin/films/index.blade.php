@@ -23,12 +23,8 @@
                 @foreach ($films as $film)
                     <tr>
                         <td>
-                            @if ($film->immagine)
-                                <img src="{{ asset('storage/' . $film->immagine) }}" alt="{{ $film->titolo }}"
-                                     class="img-thumbnail" style="height: 60px;">
-                            @else
-                                <span class="text-secondary">-</span>
-                            @endif
+                            <img src="{{ $film->immagine ? asset('storage/' . $film->immagine) : asset('img/placeholder-film.png') }}"
+                                class="img-thumbnail" style="max-height: 50px;"" alt="{{ $film->nome }}">
                         </td>
                         <td>{{ $film->episodio ?? '-' }}</td>
                         <td>{{ $film->titolo }}</td>

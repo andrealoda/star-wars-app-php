@@ -4,10 +4,8 @@
     <div class="container py-4">
         <h1>{{ $film->titolo }}</h1>
 
-        @if ($film->immagine)
-            <img src="{{ asset('storage/' . $film->immagine) }}" alt="{{ $film->titolo }}" class="img-fluid mb-3 img-thumbnail"
-                style="max-height: 300px;">
-        @endif
+        <img src="{{ $film->immagine ? asset('storage/' . $film->immagine) : asset('img/placeholder-film.png') }}"
+            class="img-thumbnail my-3" style="max-height: 300px;" alt="{{ $film->nome }}">
 
         <ul class="list-group mb-3">
             <li class="list-group-item"><strong>Episodio: </strong>{{ $film->episodio ?? '-' }}</li>

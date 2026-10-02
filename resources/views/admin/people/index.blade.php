@@ -29,12 +29,8 @@
                 @foreach ($people as $person)
                     <tr>
                         <td>
-                            @if ($person->immagine)
-                                <img src="{{ asset('storage/' . $person->immagine) }}" alt="{{ $person->titolo }}"
-                                    class="img-thumbnail" style="height: 60px;">
-                            @else
-                                <span class="text-secondary">-</span>
-                            @endif
+                            <img src="{{ $person->immagine ? asset('storage/' . $person->immagine) : asset('img/placeholder-personaggio-thumb.png') }}"
+                                class="img-thumbnail" style="max-height: 50px;" alt="{{ $person->nome }}">
                         </td>
                         <td>{{ $person->nome }}</td>
                         <td>{{ $person->altezza ?? '-' }}</td>

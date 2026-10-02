@@ -21,12 +21,8 @@
                 @foreach ($species as $specie)
                     <tr>
                         <td>
-                            @if ($specie->immagine)
-                                <img src="{{ asset('storage/' . $specie->immagine) }}" alt="{{ $specie->titolo }}"
-                                    class="img-thumbnail" style="height: 60px;">
-                            @else
-                                <span class="text-secondary">-</span>
-                            @endif
+                            <img src="{{ $specie->immagine ? asset('storage/' . $specie->immagine) : asset('img/placeholder-specie.png') }}"
+                                class="img-thumbnail" style="max-height: 50px;"" alt="{{ $specie->nome }}">
                         </td>
                         <td>{{ $specie->nome }}</td>
                         <td>{{ $specie->lingua ?? '-' }}</td>

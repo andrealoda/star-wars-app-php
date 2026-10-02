@@ -4,10 +4,9 @@
     <div class="container py-4">
         <h1>{{ $person->nome }}</h1>
 
-        @if ($person->immagine)
-            <img src="{{ asset('storage/' . $person->immagine) }}" alt="{{ $person->titolo }}" class="img-fluid mb-3 img-thumbnail"
-                style="max-height: 300px;">
-        @endif
+        <img src="{{ $person->immagine ? asset('storage/' . $person->immagine) : asset('img/placeholder-personaggio.png') }}"
+            class="img-thumbnail my-3" style="max-height: 300px;" alt="{{ $person->nome }}">
+
 
 
         <ul class="list-group mb-3">
