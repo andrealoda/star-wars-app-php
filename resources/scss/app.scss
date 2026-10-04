@@ -1,27 +1,50 @@
 @import '~bootstrap/scss/bootstrap';
 
-/* Tema Star Wars — override minimo sopra Bootstrap dark mode */
+/* Holocron: backoffice in tema chiaro, il "negativo" del front */
 
-.navbar-brand {
-    color: #ffe81f !important; /* giallo iconico Star Wars */
-    font-weight: 700;
-    letter-spacing: 1px;
+:root {
+    --sw-ink: #0b2a5a;
+    --sw-blue: #1f6fb8;
+    --sw-bg: #f4f7fc;
+    --sw-surface: #ffffff;
+    --sw-border: #d5deee;
+    --sw-muted: #5d7396;
+
+    --bs-body-bg: var(--sw-bg);
+    --bs-body-color: var(--sw-ink);
+    --bs-body-font-family: 'Exo 2', sans-serif;
+    --bs-border-color: var(--sw-border);
+    --bs-link-color-rgb: 31, 111, 184;
+    --bs-link-hover-color-rgb: 11, 42, 90;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 0.05em;
+}
+
+.navbar {
+    --bs-navbar-brand-color: var(--sw-ink);
+    --bs-navbar-brand-hover-color: var(--sw-blue);
+    --bs-navbar-color: var(--sw-muted);
+    --bs-navbar-hover-color: var(--sw-ink);
+    --bs-navbar-active-color: var(--sw-ink);
+}
+
+.card {
+    --bs-card-bg: var(--sw-surface);
+    --bs-card-border-color: var(--sw-border);
+}
+
+.table {
+    --bs-table-bg: var(--sw-surface);
 }
 
 .btn-primary {
-    --bs-btn-bg: #4da6ff;
-    --bs-btn-border-color: #4da6ff;
-    --bs-btn-hover-bg: #2f8ce6;
-    --bs-btn-hover-border-color: #2f8ce6;
-    --bs-btn-active-bg: #1a75d1;
-    --bs-btn-active-border-color: #1a75d1;
-}
-
-.btn-warning {
-    --bs-btn-bg: #ffe81f;
-    --bs-btn-border-color: #ffe81f;
-    --bs-btn-color: #000;
-    --bs-btn-hover-bg: #e6d01c;
-    --bs-btn-hover-border-color: #e6d01c;
-    --bs-btn-hover-color: #000;
+    --bs-btn-bg: var(--sw-blue);
+    --bs-btn-border-color: var(--sw-blue);
+    --bs-btn-hover-bg: var(--sw-ink);
+    --bs-btn-hover-border-color: var(--sw-ink);
+    --bs-btn-active-bg: var(--sw-ink);
+    --bs-btn-active-border-color: var(--sw-ink);
 }
