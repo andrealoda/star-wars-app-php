@@ -8,7 +8,8 @@
         <div class="row justify-content-center">
             <div class="col">
                 <div class="card">
-                    <div class="card-header">{{ __('Welcome Administrator - You are now logged in!') }}
+                    <div class="card-header">
+                        Benvenuto {{ Auth::user()->name }}!
                     </div>
 
 
@@ -30,7 +31,7 @@
                     <div class="col-12 col-md-6">
                         <div class="card h-100">
                             <div class="card-body d-flex flex-column align-items-center text-center">
-                                <i class="bi bi-people-fill" style="font-size: 4rem;"></i>
+                                <i class="bi bi-person-lines-fill" style="font-size: 4rem;"></i>
                                 <h5 class="card-title mt-3">Personaggi</h5>
                                 <a href="{{ route('admin.people.index') }}" class="btn btn-sm btn-primary mt-auto">Vai alla
                                     lista dei personaggi</a>
@@ -41,7 +42,7 @@
                     <div class="col-12 col-md-6">
                         <div class="card h-100">
                             <div class="card-body d-flex flex-column align-items-center text-center">
-                                <i class="bi bi-globe-americas" style="font-size: 4rem;"></i>
+                                <i class="bi bi-globe-europe-africa" style="font-size: 4rem;"></i>
                                 <h5 class="card-title mt-3">Pianeti</h5>
                                 <a href="{{ route('admin.planets.index') }}" class="btn btn-sm btn-primary mt-auto">Vai alla
                                     lista dei pianeti</a>
@@ -52,7 +53,7 @@
                     <div class="col-12 col-md-6">
                         <div class="card h-100">
                             <div class="card-body d-flex flex-column align-items-center text-center">
-                                <i class="bi bi-stars" style="font-size: 4rem;"></i>
+                                <i class="bi bi-bug-fill" style="font-size: 4rem;"></i>
                                 <h5 class="card-title mt-3">Specie</h5>
                                 <a href="{{ route('admin.species.index') }}" class="btn btn-sm btn-primary mt-auto">Vai alla
                                     lista delle specie</a>
