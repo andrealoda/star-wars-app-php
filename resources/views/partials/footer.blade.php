@@ -6,14 +6,14 @@
             <div class="col-md-6">
                 <div class="d-flex align-items-center gap-2 mb-2">
                     <img src="{{ asset('img/logo-back.svg') }}" alt="" height="32">
-                    <h2 class="h6 mb-0">Orbita Digital Archives Pvt. Ltd.</h2>
+                    <h2 class="h6 mb-0">Orbita Digital Ltd.</h2>
                 </div>
                 <p class="small text-body-secondary mb-2">
                     Archiviamo la galassia dal 2026.<br>
                     Software per la catalogazione di mondi, specie ed equipaggi.
                 </p>
                 <p class="small text-body-secondary mb-0">
-                    <i class="bi bi-geo-alt me-1"></i>Bengaluru, Karnataka, India<br>
+                    <i class="bi bi-geo-alt me-1"></i>Brescia, Italia<br>
                     <i class="bi bi-envelope me-1"></i>info@example.com
                 </p>
             </div>
