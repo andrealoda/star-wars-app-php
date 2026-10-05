@@ -85,8 +85,8 @@
 </div>
 
 <div class="mb-3">
-    <label for="people_id" class="form-label">Specie</label>
-    <select name="species_id" for="species_id" class="form-select @if ($errors->has('species_id')) is-invalid @endif">
+    <label for="species_id" class="form-label">Specie</label>
+    <select name="species_id" id="species_id" class="form-select @if ($errors->has('species_id')) is-invalid @endif">
         <option value="">-- Nessuna --</option>
         @foreach ($species as $specie)
             <option value="{{ $specie->id }}" @selected(old('species_id', $person->species_id) == $specie->id)>{{ $specie->nome }}</option>
