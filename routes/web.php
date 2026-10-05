@@ -8,13 +8,6 @@ use App\Http\Controllers\Admin\PersonController;
 use App\Http\Controllers\Admin\PlanetController;
 use App\Http\Controllers\Admin\SpeciesController;
 
-
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

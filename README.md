@@ -1,66 +1,122 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Holocron: Backoffice e API (Laravel)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Backoffice e API REST di **Holocron**, un archivio a tema Star Wars. Questo repository contiene la parte Laravel del progetto: il pannello di amministrazione protetto da login e le API che alimentano il sito pubblico.
 
-## About Laravel
+Il sito pubblico, realizzato in React, si trova in un repository separato: [star-wars-app-react](https://github.com/andrealoda/star-wars-app-react).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Progetto didattico realizzato per il corso Boolean. Star Wars è un marchio di Lucasfilm Ltd.: questo progetto non è affiliato né approvato da Lucasfilm o Disney.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Cosa fa
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Backoffice** in Blade e Bootstrap, accessibile solo dopo il login (Laravel Breeze). Permette di creare, leggere, modificare ed eliminare film, personaggi, specie e pianeti.
+- **Upload delle immagini** per ogni entità. Quando si sostituisce o si elimina un record, il vecchio file viene rimosso dal disco.
+- **API REST** in sola lettura, usate dal frontend React.
 
-## Learning Laravel
+## Database
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Tabella | Contenuto principale | Relazioni |
+| --- | --- | --- |
+| `planets` | nome, clima, terreno, popolazione, immagine | un pianeta ha molti personaggi (1-N) |
+| `species` | nome, lingua, immagine | una specie ha molti personaggi (1-N) |
+| `people` | nome, altezza, peso, capelli, occhi, anno di nascita, genere, immagine | appartiene a un pianeta e a una specie (opzionali) |
+| `films` | titolo, episodio, data di uscita, regista, sinossi, immagine | molti-a-molti con i personaggi tramite `film_person` (N-N) |
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Se un pianeta o una specie viene eliminato, i personaggi collegati restano e perdono solo il riferimento (`nullOnDelete`). Se si elimina un film o un personaggio, le righe corrispondenti nella tabella pivot vengono eliminate (`cascadeOnDelete`).
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Requisiti
 
-## Laravel Sponsors
+- PHP 8.2 o superiore
+- Composer
+- Node.js e npm
+- MySQL
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Installazione
 
-### Premium Partners
+```bash
+git clone https://github.com/andrealoda/star-wars-app-php.git
+cd star-wars-app-php
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+composer install
+npm install
 
-## Contributing
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Crea un database vuoto chiamato `star_wars_app` e imposta nel file `.env` le credenziali di MySQL (`DB_USERNAME`, `DB_PASSWORD` e, se serve, `DB_PORT`). Poi:
 
-## Code of Conduct
+```bash
+php artisan migrate --seed
+php artisan storage:link
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+`migrate --seed` crea le tabelle e le popola con i dati contenuti in `database/seeders/data/` (file JSON con struttura SWAPI, la Star Wars API). `storage:link` rende raggiungibili dal browser le immagini caricate.
 
-## Security Vulnerabilities
+## Avvio
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+In due terminali:
 
-## License
+```bash
+php artisan serve    # backoffice e API su http://localhost:8000
+npm run dev          # compila SCSS e JavaScript con Vite
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Il login è su `http://localhost:8000/login`. Il seeder crea un utente per lo sviluppo in locale:
+
+- email: `test@example.com`
+- password: `password`
+
+Questo utente serve solo in locale: va cambiato o eliminato prima di qualsiasi uso diverso.
+
+## Immagini
+
+Le immagini caricate dal backoffice vengono salvate in `storage/app/public/` (cartelle `films`, `people`, `planets`, `species`) e **non sono nel repository**, perché i materiali ufficiali di Star Wars sono protetti da copyright. Un record senza immagine mostra un segnaposto: i file `public/img/placeholder-*.png` nel backoffice e quelli nel progetto React.
+
+## Variabili d'ambiente specifiche
+
+| Variabile | A cosa serve |
+| --- | --- |
+| `FRONTEND_URL` | indirizzo del sito React, usato dai link "Sito pubblico" di header e footer (letto in `config/app.php`) |
+| `FILESYSTEM_DISK=public` | disco predefinito per gli upload |
+
+Gli indirizzi del frontend ammessi dalle chiamate AJAX sono elencati in `config/cors.php`: di default `http://localhost:5173` e `http://localhost:5174`.
+
+## API
+
+Tutti gli endpoint rispondono in JSON con la forma `{ "success": true, "results": ... }` e sono di sola lettura. Un ID inesistente restituisce un errore 404.
+
+| Metodo | Endpoint | Restituisce |
+| --- | --- | --- |
+| GET | `/api/films` | tutti i film, ciascuno con i suoi personaggi |
+| GET | `/api/films/{id}` | un film con i suoi personaggi |
+| GET | `/api/people` | tutti i personaggi, con pianeta e specie |
+| GET | `/api/people/{id}` | un personaggio con pianeta e specie |
+| GET | `/api/species` | tutte le specie, ciascuna con i suoi personaggi |
+| GET | `/api/species/{id}` | una specie con i suoi personaggi |
+| GET | `/api/planets` | tutti i pianeti, ciascuno con i suoi abitanti |
+| GET | `/api/planets/{id}` | un pianeta con i suoi abitanti |
+
+Il campo `immagine` contiene il percorso relativo del file (per esempio `people/1.jpg`): l'indirizzo completo si ottiene aggiungendo `/storage/` davanti.
+
+## Rotte del backoffice
+
+Tutte richiedono il login.
+
+| Rotta | Descrizione |
+| --- | --- |
+| `/` | dashboard |
+| `/admin/films` | gestione film (CRUD) |
+| `/admin/people` | gestione personaggi (CRUD) |
+| `/admin/species` | gestione specie (CRUD) |
+| `/admin/planets` | gestione pianeti (CRUD) |
+| `/profile` | profilo dell'utente |
+
+## Struttura del codice
+
+- `app/Http/Controllers/Admin/`: controller del backoffice (resource controller con upload delle immagini)
+- `app/Http/Controllers/Api/`: controller delle API
+- `app/Models/`: modelli Eloquent e relazioni
+- `database/migrations/` e `database/seeders/`: schema e dati iniziali
+- `resources/views/layouts/app.blade.php`: layout comune, che include `partials/header` e `partials/footer`
+- `resources/views/admin/`: viste CRUD, con un `_form` condiviso tra creazione e modifica
+- `resources/scss/app.scss`: tema Bootstrap personalizzato (palette chiara del backoffice)
