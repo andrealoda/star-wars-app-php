@@ -24,7 +24,7 @@
                     <tr>
                         <td>
                             <img src="{{ $film->immagine ? asset('storage/' . $film->immagine) : asset('img/placeholder-film-thumb.png') }}"
-                                class="img-thumbnail" style="max-height: 50px;"" alt="{{ $film->nome }}">
+                                class="img-thumbnail" style="max-height: 50px;" alt="{{ $film->titolo }}">
                         </td>
                         <td>{{ $film->episodio ?? '-' }}</td>
                         <td>{{ $film->titolo }}</td>

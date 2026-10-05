@@ -74,7 +74,7 @@
 
     @if ($film->immagine)
         <div class="mt-2">
-            <img src="{{ asset('storage/' . $film->immagine) }}" alt="{{ $film->nome }}"
+            <img src="{{ asset('storage/' . $film->immagine) }}" alt="{{ $film->titolo }}"
                 style="max-height: 150px;">
         </div>
     @endif

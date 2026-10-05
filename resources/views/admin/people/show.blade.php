@@ -2,6 +2,10 @@
 
 @section('content')
     <div class="container py-4">
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
         <h1>{{ $person->nome }}</h1>
 
         <img src="{{ $person->immagine ? asset('storage/' . $person->immagine) : asset('img/placeholder-personaggio.png') }}"

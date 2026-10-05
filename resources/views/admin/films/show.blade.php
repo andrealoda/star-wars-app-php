@@ -2,10 +2,14 @@
 
 @section('content')
     <div class="container py-4">
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
         <h1>{{ $film->titolo }}</h1>
 
         <img src="{{ $film->immagine ? asset('storage/' . $film->immagine) : asset('img/placeholder-film.png') }}"
-            class="img-thumbnail my-3" style="max-height: 300px;" alt="{{ $film->nome }}">
+            class="img-thumbnail my-3" style="max-height: 300px;" alt="{{ $film->titolo }}">
 
         <ul class="list-group mb-3">
             <li class="list-group-item"><strong>Episodio: </strong>{{ $film->episodio ?? '-' }}</li>

@@ -46,7 +46,7 @@ class PersonController extends Controller
             'peso' => 'nullable|integer|min:0',
             'colore_capelli' => 'nullable|string|max:255',
             'colore_occhi' => 'nullable|string|max:255',
-            'anno_nascita' => 'nullable|string|min:0',
+            'anno_nascita' => 'nullable|string|max:255',
             'genere' => 'nullable|string|max:255',
 
             'planet_id' => 'nullable|exists:planets,id',
@@ -106,7 +106,7 @@ class PersonController extends Controller
             'peso' => 'nullable|integer|min:0',
             'colore_capelli' => 'nullable|string|max:255',
             'colore_occhi' => 'nullable|string|max:255',
-            'anno_nascita' => 'nullable|string|min:0',
+            'anno_nascita' => 'nullable|string|max:255',
             'genere' => 'nullable|string|max:255',
 
             'planet_id' => 'nullable|exists:planets,id',
