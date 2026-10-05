@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Person;
 use App\Models\Planet;
 use App\Models\Species;
+use App\Models\Film;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -31,8 +32,9 @@ class PersonController extends Controller
 
         $planets = Planet::orderBy('nome')->get();
         $species = Species::orderBy('nome')->get();
+        $films = Film::orderBy('episodio')->get();
 
-        return view('admin.people.create', compact('person', 'planets', 'species'));
+        return view('admin.people.create', compact('person', 'planets', 'species', 'films'));
     }
 
     /**
@@ -51,6 +53,11 @@ class PersonController extends Controller
 
             'planet_id' => 'nullable|exists:planets,id',
             'species_id' => 'nullable|exists:species,id',
+
+            // film può mancare, ma se c'è deve essere un array.
+            'film_ids' => 'nullable|array',
+            // .*, vale per ogni elemento dell'array e controlla che ogni id esista davvero in films
+            'film_ids.*' => 'exists:films,id',
 
             'immagine' => 'nullable|image|max:2048',
         ]);
@@ -74,6 +81,8 @@ class PersonController extends Controller
 
         $newPerson->save();
 
+        $newPerson->films()->sync($data['film_ids'] ?? []);
+
         return redirect()->route('admin.people.show', $newPerson)->with('success', 'Personaggio creato con successo');
     }
 
@@ -92,7 +101,8 @@ class PersonController extends Controller
     {
         $planets = Planet::orderBy('nome')->get();
         $species = Species::orderBy('nome')->get();
-        return view('admin.people.edit', compact('person', 'planets', 'species'));
+        $films = Film::orderBy('episodio')->get();
+        return view('admin.people.edit', compact('person', 'planets', 'species', 'films'));
     }
 
     /**
@@ -111,6 +121,11 @@ class PersonController extends Controller
 
             'planet_id' => 'nullable|exists:planets,id',
             'species_id' => 'nullable|exists:species,id',
+
+            // film può mancare, ma se c'è deve essere un array.
+            'film_ids' => 'nullable|array',
+            // .*, vale per ogni elemento dell'array e controlla che ogni id esista davvero in films
+            'film_ids.*' => 'exists:films,id',
 
             'immagine' => 'nullable|image|max:2048',
         ]);
@@ -137,6 +152,8 @@ class PersonController extends Controller
 
         $person->save();
 
+        $person->films()->sync($data['film_ids'] ?? []);
+
         return redirect()->route('admin.people.show', $person)->with('success', 'Personaggio aggiornato con successo');
     }
 
@@ -147,7 +164,7 @@ class PersonController extends Controller
     {
         if ($person->immagine) {
             Storage::disk('public')->delete($person->immagine);
-        }    
+        }
 
         $person->delete();
         return redirect()->route('admin.people.index')->with('success', 'Personaggio eliminato con successo.');

@@ -19,7 +19,7 @@ class ApiPersonController extends Controller
 
     public function show($id)
     {
-        $person = Person::with('planet', 'species')->findOrFail($id);
+        $person = Person::with('planet', 'species', 'films')->findOrFail($id);
 
         return response()->json([
             'success' => true,

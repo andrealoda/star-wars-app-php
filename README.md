@@ -90,7 +90,7 @@ Tutti gli endpoint rispondono in JSON con la forma `{ "success": true, "results"
 | GET | `/api/films` | tutti i film, ciascuno con i suoi personaggi |
 | GET | `/api/films/{id}` | un film con i suoi personaggi |
 | GET | `/api/people` | tutti i personaggi, con pianeta e specie |
-| GET | `/api/people/{id}` | un personaggio con pianeta e specie |
+| GET | `/api/people/{id}` | un personaggio con pianeta, specie e film (ordinati per episodio) |
 | GET | `/api/species` | tutte le specie, ciascuna con i suoi personaggi |
 | GET | `/api/species/{id}` | una specie con i suoi personaggi |
 | GET | `/api/planets` | tutti i pianeti, ciascuno con i suoi abitanti |

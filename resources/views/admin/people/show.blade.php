@@ -40,6 +40,19 @@
             </li>
         </ul>
 
+        <h2 class="h5 mt-4">Film</h2>
+        @if ($person->films->isEmpty())
+            <p class="text-secondary">Nessun film collegato.</p>
+        @else
+            <ul class="list-group mb-3">
+                @foreach ($person->films as $film)
+                    <li class="list-group-item">
+                        <a href="{{ route('admin.films.show', $film) }}">{{ $film->titolo }}</a>
+                    </li>
+                @endforeach
+            </ul>
+        @endif
+
         <a href="{{ route('admin.people.index') }}" class="btn btn-secondary">Torna alla lista</a>
         <a href="{{ route('admin.people.edit', $person) }}" class="btn btn-warning">Modifica</a>
 

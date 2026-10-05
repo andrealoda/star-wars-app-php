@@ -20,6 +20,7 @@ class Person extends Model
 
     public function films()
     {
-        return $this->belongsToMany(Film::class);
+        // i film del personaggio, ordinati per numero di episodio
+        return $this->belongsToMany(Film::class)->orderBy('episodio');
     }
 }

@@ -86,7 +86,7 @@
 
 <div class="mb-3">
     <label for="people_id" class="form-label">Specie</label>
-    <select name="species_id" id="species_id" class="form-select @if ($errors->has('species_id')) is-invalid @endif">
+    <select name="species_id" for="species_id" class="form-select @if ($errors->has('species_id')) is-invalid @endif">
         <option value="">-- Nessuna --</option>
         @foreach ($species as $specie)
             <option value="{{ $specie->id }}" @selected(old('species_id', $person->species_id) == $specie->id)>{{ $specie->nome }}</option>
@@ -95,6 +95,19 @@
     @if ($errors->has('species_id'))
         <div class="invalid-feedback">{{ $errors->first('species_id') }}</div>
     @endif
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Film</label>
+    <div class="border rounded p-2" style="max-height: 250px; overflow-y: auto;">
+        @foreach ($films as $film)
+            <div class="form-check">
+                <input type="checkbox" name="film_ids[]" id="film_{{ $film->id }}" value="{{ $film->id }}"
+                    class="form-check-input" @checked(collect(old('film_ids', $person->films->pluck('id')))->contains($film->id))>
+                <label class="form-check-label" for="film_{{ $film->id }}">{{ $film->titolo }}</label>
+            </div>
+        @endforeach
+    </div>
 </div>
 
 <div class="mb-3">
