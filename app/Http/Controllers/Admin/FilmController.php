@@ -47,7 +47,7 @@ class FilmController extends Controller
         $newFilm->sinossi = $data['sinossi'] ?? null;
 
         if ($request->hasFile('immagine')) {
-            // scriviamo il file nella cartella public/films
+            // storage/app/public/films/
             $newFilm->immagine = $request->file('immagine')->store('films', 'public');
         }
 
